@@ -2,10 +2,12 @@
 // for testing.
 package gobberish
 
-import "errors"
-import "math/rand"
-import "time"
-import "unicode"
+import (
+	"errors"
+	"math/rand"
+	"time"
+	"unicode"
+)
 
 // Generate a random utf-8 string of a given character (not byte) length.
 // The range of the random characters is the entire printable unicode range.
@@ -35,9 +37,10 @@ func CreateRandomRune() rune {
 	return CreateRandomRuneInRange(unicode.GraphicRanges)
 }
 
+var r = rand.New(rand.NewSource(time.Now().UnixNano()))
+
 // Generates a random rune in the given RangeTable.
 func CreateRandomRuneInRange(tables []*unicode.RangeTable) rune {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	i := r.Intn(totalInRange(tables))
 	x, _ := getItemInRangeTable(i, tables)
 
